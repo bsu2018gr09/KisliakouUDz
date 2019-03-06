@@ -16,7 +16,7 @@ void free_array(int **, int);
 
 int main() {
 	int N, M;
-	cout << "Enter count of columns and count of rows: ";
+	cout << "Enter count of rows and count of columns: ";
 	cin >> N >> M;
 	int** p = give_memory(N, M);
 	init_array(p, N, M);
