@@ -15,9 +15,12 @@ void free_array(int **, int);
 
 
 int main() {
-	int N, M;
-	cout << "Enter count of rows and count of columns: ";
-	cin >> N >> M;
+	int N = -1, M = -1;
+	while (N < 0 || M < 0) {
+		system("cls");
+		cout << "Enter count of rows and count of columns: ";
+		cin >> N >> M;
+	}
 	int** p = give_memory(N, M);
 	init_array(p, N, M);
 	print_array(p, N, M);
