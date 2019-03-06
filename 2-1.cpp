@@ -19,10 +19,6 @@ int main() {
 	cout << "Enter count of columns and count of rows: ";
 	cin >> N >> M;
 	int** p = give_memory(N, M);
-	cout << "Main address " << p << '\n';
-	for (int i = 0; i < N; i++) {
-		cout << p[i] << " address " << i + 1 << '\n';
-	}
 	init_array(p, N, M);
 	print_array(p, N, M);
 	mainTask(p, N, M);
