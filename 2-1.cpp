@@ -33,6 +33,8 @@ int main() {
 
 int** give_memory(int N, int M) {
 	int** p = new(nothrow) int* [N];
+	if(p == nullptr)
+		return nullptr;
 	for (int i = 0; i < N; ++i) {
 		int* p1 = new(nothrow) int[M];
 		p[i] = p1;
@@ -66,6 +68,7 @@ void free_array(int** p, int N) {
 		p[i] = nullptr;
 	}
 	delete[]p;
+	p = nullptr;
 }
 
 void mainTask(int** p, int N, int M) {
