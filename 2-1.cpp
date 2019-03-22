@@ -78,7 +78,7 @@ void free_array(int** p, int N) {
 }
 
 void mainTask(int** p, int N, int M) {
-	bool flag;
+	bool flag = true;
 	for (int i = 0; i < N; i++) {
 		int g;
 		for (flag = true, g = 0; g < M; g++) {
