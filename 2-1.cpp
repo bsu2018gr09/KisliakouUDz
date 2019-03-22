@@ -40,7 +40,7 @@ int** give_memory(int N, int M) {
 	if(p == nullptr)
 		return nullptr;
 	for (int i = 0; i < N; ++i) {
-		int* p1 = new(nothrow) int[M];
+		int* p1 = new(nothrow) int[M];//нет проверки
 		p[i] = p1;
 	}
 	return p;
