@@ -40,8 +40,10 @@ int** give_memory(int N, int M) {
 	if(p == nullptr)
 		return nullptr;
 	for (int i = 0; i < N; ++i) {
-		int* p1 = new(nothrow) int[M];//нет проверки и зачем
-		p[i] = p1;
+		p[i] = new(nothrow) int[M];
+		if(!p[i]){
+			break;
+		}
 	}
 	return p;
 }
@@ -78,10 +80,9 @@ void free_array(int** p, int N) {
 void mainTask(int** p, int N, int M) {
 	bool flag;
 	for (int i = 0; i < N; i++) {
-		int* p1 = p[i];//зачем
 		int g;
 		for (flag = true, g = 0; g < M; g++) {
-			if (p1[g] < 0) {
+			if (p[i][g] < 0) {
 				flag = false;
 				break;
 			}
