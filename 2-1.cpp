@@ -50,10 +50,12 @@ int** give_memory(int N, int M) {
 
 void init_array(int** p, int N, int M) {
 	srand(time(NULL));
+	int a = -10;
+	int b = 100;
 	for (int i = 0; i < N; i++) {
 		int* p1 = p[i];
 		for (int g = 0; g < M; g++) {
-			p1[g] = -10 + (rand() % 100);
+			p1[g] = a + (rand() % b);
 		}
 	}
 }
