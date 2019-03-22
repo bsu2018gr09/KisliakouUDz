@@ -22,6 +22,10 @@ int main() {
 		cin >> N >> M;
 	}
 	int** p = give_memory(N, M);
+	if(!p){
+		cout << "No memory!";
+		exit(1);
+	}
 	init_array(p, N, M);
 	print_array(p, N, M);
 	mainTask(p, N, M);
