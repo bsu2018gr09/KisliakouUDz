@@ -5,66 +5,60 @@
 #include <iostream>
 #include <random>
 #include <time.h>
-
-void initRandomArr(int* p, int N);
-int howManyCopies(int* p, int N);
-void bubbleSort(int* p, int N);
-void outputArray(int* p, int N);
+#include <iomanip>
 
 using namespace std;
 
+int* give_memory(int N);
+void init_array(int* p, int N);
+int searching(int* p, int N);
+void print_array(int* p, int N);
+
 int main() {
-	setlocale(LC_ALL, "Russian");
-	int N;
-	cout << "Введите количество элементов массива: "; cin >> N;
-	int* p;
-	p = new int[N];
-	initRandomArr(p, N);
-	outputArray(p, N);
-	cout << '\n';
-	cout << "Количество повторов: " << howManyCopies(p, N);
-	cout << '\n';
+	cout << "Enter number of elements: ";
+	int N; cin >> N;
+	
+	int* p = give_memory(N);
+	if (!p) { cout << "No memory!"; }
+
+	init_array(p, N);
+	print_array(p, N);
+	cout << "Count of repeating elements: " << searching(p, N) << '\n';
+
 	delete[]p;
+	p = nullptr;
 	system("pause");
 	return 0;
 }
 
-void initRandomArr(int* p, int N) {
-	srand(time(NULL));
-	for (int i = 0; i < N; ++i)
-		*(p + i) = rand() % 10;
+int* give_memory(int N) {
+	int* p = new(nothrow) int[N];
+	if (p == nullptr) { return nullptr; }
+	return p;
 }
 
-void bubbleSort(int* p, int N) {
-	int temp = 0;
+void init_array(int* p, int N){
+	srand(time(NULL));
+	int a = 10;
 	for (int i = 0; i < N; i++) {
-		for (int g = i + 1; g < N; g++) {
-			if (*(p + i) > *(p + g)) {
-				temp = *(p + i);
-				*(p + i) = *(p + g);
-				*(p + g) = temp;
-			}
-		}
+		p[i] = rand() % 10;
 	}
 }
 
-int howManyCopies(int* p, int N) {
-	bubbleSort(p, N);
-	int g = 0, counter = 0;
-	for (int i = 0; i < N; ++i) {
-		while (p[i] == p[i + 1]) {
-			++g;
-			++i;
-		}
-		if (g > 0) {
-			++counter;
-			g = 0;
-		}
+void print_array(int* p, int N) {
+	for (int i = 0; i < N; i++) {
+		cout << setw(5) << p[i];
+	}
+	cout << '\n';
+}
+
+int searching(int* p, int N) {
+	int counter = 0, c = 0;
+	for (int i = 0; i < N; i++, c = 0) {
+		for(int g = 0; g < N; g++)
+			if (p[g] == i) { c++; }
+
+		if (c > 1) { counter++; }
 	}
 	return counter;
-}
-
-void outputArray(int* p, int N) {
-	for (int i = 0; i < N; ++i)
-		cout << *(p + i) << ' ';
 }
