@@ -1,3 +1,5 @@
+//Расположить в порядке возрастания элементы массива А(N), начиная с k-го элемента.
+
 #include <iostream>
 #include <random>
 #include <time.h>
@@ -54,12 +56,15 @@ void print_array(int* p, int N) {
 
 void sortFromPosition(int* p, int N, int k) {
 	int tmp = 0;
-	for (int i = k; i < N; i++) {
-		for (int g = i + 1; g < N; g++) {
-			if (p[i] > p[g]) {
+	bool flag = false;
+	while (!flag){
+		flag = true;
+		for (int i = k; i < N - 1; i++) {
+			if (p[i] > p[i + 1]) {
 				tmp = p[i];
-				p[i] = p[g];
-				p[g] = tmp;
+				p[i] = p[i + 1];
+				p[i + 1] = tmp;
+				flag = false;
 			}
 		}
 	}
