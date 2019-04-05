@@ -1,3 +1,8 @@
+/*
+Массив чисел размера N проинициализировать случайными числами из промежутка от -N до N. 
+Написать функцию циклического сдвига элементов массива вправо на k элементов.
+*/
+
 #include <iostream>
 #include <random>
 #include <time.h>
@@ -39,9 +44,8 @@ int* give_memory(int N) {
 
 void init_array(int* p, int N){
 	srand(time(NULL));
-	int a = 10;
 	for (int i = 0; i < N; i++) {
-		p[i] = rand() % a;
+		p[i] = -N + rand() % (N * 2);
 	}
 }
 
