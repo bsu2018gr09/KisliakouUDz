@@ -1,7 +1,3 @@
-/*
-  Class Money
-*/
-
 #include <iostream>
 #include <random>
 #include <time.h>
@@ -17,7 +13,7 @@ private:
 public:
 
 	//Constructors
-	Money() {};
+	Money() {}
 	~Money() { /*cout << "Destructor is woking!\n"; */ }
 	Money(int r, int c = 0) : roub(r), coins(c) {
 
@@ -87,6 +83,43 @@ public:
 		else { return(--this->roub, this->coins); }
 	}
 
+	bool operator == (Money m) {
+		if (roub == m.roub && coins == m.coins) { return true; }
+		else { return false; }
+	}
+
+	bool operator > (Money m) {
+		if (roub > m.roub) { return true; }
+		else
+			if (coins > m.coins) { return true; }
+			else { return false; }
+
+	}
+
+	bool operator >= (Money m) {
+		if (roub >= m.roub) { return true; }
+		else
+			if (coins >= m.coins) { return true; }
+			else { return false; }
+
+	}
+
+	bool operator < (Money m) {
+		if (roub < m.roub) { return true; }
+		else
+			if (coins < m.coins) { return true; }
+			else { return false; }
+
+	}
+
+	bool operator <= (Money m) {
+		if (roub <= m.roub) { return true; }
+		else
+			if (coins <= m.coins) { return true; }
+			else { return false; }
+
+	}
+
 	friend ostream& operator << (ostream & stream, const Money m){
 		stream << "Roubs: " << m.roub << "\nCoins: " << m.coins << '\n';
 		return stream;
@@ -130,7 +163,13 @@ int main() {
 	*p1 -= *p2;
 	cout << "\nm1 -= m2 : \n" << *p1 << '\n';
 	
-
+	Money m5(1, 5), m6(1, 6);
+	cout << "\n*************************";
+	cout << "\nWorking of bool operators:\n";
+	cout << "The first: \n" << m5 << "\nThe second: \n" << m6 << '\n';
+	cout << "m5 > m6: " << (bool)(m5 > m6) << '\n';
+	cout << "m5 == m6: " << (bool)(m5 == m6) << '\n';
+	cout << "m5 < m6: " << (bool)(m5 < m6) << '\n';
 	system("pause");
 	return 0;
 }
