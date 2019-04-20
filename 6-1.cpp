@@ -6,14 +6,14 @@ using namespace std;
 
 
 
-class Money {
+class Money {//нигде не вижу const!!!!
 private:
 	int roub;
 	int coins;
 public:
 
 	//Constructors
-	Money() {}
+	Money() {}//плохо!!!!
 	~Money() { /*cout << "Destructor is woking!\n"; */ }
 	Money(int r, int c = 0) : roub(r), coins(c) {
 
@@ -52,7 +52,7 @@ public:
 	void operator += (Money m) {
 		this->roub += m.roub;
 		this->coins += m.coins;
-		while (this->coins > 100) {
+		while (this->coins > 100) {//этот код я уже видел. Значит надо его в отдельную функцию!!! Или использовать уже существующий метод
 			this->roub++;
 			this->coins -= 100;
 		}
@@ -67,7 +67,7 @@ public:
 		if (roub < 0) { roub = 0; coins = 0;  cout << "The very little of roubles"; }
 		coins -= m.coins;
 		if (coins < 0) {
-			while (coins < 0) {
+			while (coins < 0) { //этот код я уже видел. Значит надо его в отдельную функцию!!! Или использовать уже существующий метод
 				roub--;
 				coins += 100;
 			}
@@ -91,7 +91,7 @@ public:
 	bool operator > (Money m) {
 		if (roub > m.roub) { return true; }
 		else
-			if (coins > m.coins) { return true; }
+			if (coins > m.coins) { return true; }//можно обойтись только return(coins > m.coins)
 			else { return false; }
 
 	}
