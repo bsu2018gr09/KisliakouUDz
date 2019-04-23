@@ -91,32 +91,29 @@ public:
 	bool operator > (Money m) {
 		if (roub > m.roub) { return true; }
 		else
-			if (coins > m.coins) { return true; }//можно обойтись только return(coins > m.coins)
-			else { return false; }
+			return(coins > m.coins)//можно обойтись только return(coins > m.coins)
+			//Исправлено!
 
 	}
 
 	bool operator >= (Money m) {
 		if (roub >= m.roub) { return true; }
 		else
-			if (coins >= m.coins) { return true; }
-			else { return false; }
+			return(coins >= m.coins)
 
 	}
 
 	bool operator < (Money m) {
 		if (roub < m.roub) { return true; }
 		else
-			if (coins < m.coins) { return true; }
-			else { return false; }
+			return(coins < m.coins)
 
 	}
 
 	bool operator <= (Money m) {
 		if (roub <= m.roub) { return true; }
 		else
-			if (coins <= m.coins) { return true; }
-			else { return false; }
+			return(coins <= m.coins)
 
 	}
 
