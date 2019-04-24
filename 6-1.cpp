@@ -18,7 +18,7 @@ private:
 	int roub;
 	int coins;
 
-
+// я думаю надо что -то типа check вместо твоих почему то  roubPlus и roubMinus или обоснуй!!!!
 public:
 	//Constructors
 	Money(): roub(0), coins(0) {}//плохо!!!!
@@ -41,34 +41,34 @@ public:
 	}
 
 	//Getter and setter for Roubles
-	void setRoub(int roub) { this->roub = roub; }
+	void setRoub(int roub) { this->roub = roub; }// и никаких проверок? Плохо
 	int getRoub() { return roub; }
 
 	//Getter and setter for coins
-	void setCouns(int coins) { this->coins = coins; }
+	void setCouns(int coins) { this->coins = coins; }// и никаких проверок? Плохо
 	int getCoins() { return coins; }
 
 
-	void operator = (const Money m) {
+	void operator = (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		this->roub = m.roub;
 		this->coins = m.coins;
 	}
 
-	Money operator + (const Money m) {
+	Money operator + (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		return Money(this->roub + m.roub, this->coins + m.coins);
 	}
 
-	void operator += (const Money m) {
+	void operator += (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		this->roub += m.roub;
 		this->coins += m.coins;
 		roubPlus();
 	}
 
-	Money operator - (const Money m) {
+	Money operator - (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		return Money(this->roub - m.roub, this->coins - m.coins);
 	}
 
-	void operator -= (const Money m) {
+	void operator -= (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		roub -= m.roub;
 		if (roub < 0) { roub = 0; coins = 0;  cout << "The very little of roubles"; }
 		coins -= m.coins;
@@ -86,12 +86,12 @@ public:
 		else { return(--this->roub, this->coins); }
 	}
 
-	bool operator == (const Money m) {
+	bool operator == (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub == m.roub && coins == m.coins) { return true; }
 		else { return false; }
 	}
 
-	bool operator > (const Money m) {
+	bool operator > (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub > m.roub) { return true; }
 		else
 			return(coins > m.coins);//можно обойтись только return(coins > m.coins)
@@ -99,21 +99,21 @@ public:
 
 	}
 
-	bool operator >= (const Money m) {
+	bool operator >= (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub >= m.roub) { return true; }
 		else
 			return(coins >= m.coins);
 
 	}
 
-	bool operator < (const Money m) {
+	bool operator < (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub < m.roub) { return true; }
 		else
 			return(coins < m.coins);
 
 	}
 
-	bool operator <= (const Money m) {
+	bool operator <= (const Money m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub <= m.roub) { return true; }
 		else
 			return(coins <= m.coins);
