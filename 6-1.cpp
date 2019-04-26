@@ -1,9 +1,16 @@
 /*
-	Исправлен список инициализаций в конструкторе по умолчанию
-	Добавлены "повторяющиеся функции"
-	Добавлены везде const 
-	Написан конструктор копирования
-	Исправлены возвращения булевских значений в функциях на более простые
+	Исправлены принимаемые значения операторов
+	Добавлены проверки в сеттеры
+	
+	Обоснование roubPlus и roubMinus:
+	
+	Считаю, что в двух разных ситуациях использование метода 
+	с неконкретным названием check абсолютно не рационально.
+	В данной конкретной ситуации более целесообразно использовать названия,
+	как привиденныё выше. Программист, читающий код, с большей вероятностью поймёт 
+	roubPlus и roubMinus, вместо checkНепонятноЧтоИЗАчем
+	
+	Насчёт остальных замечаний согласен безоговорчно. Постарался всё исправить
 */
 #include <iostream>
 #include <random>
@@ -18,10 +25,10 @@ private:
 	int roub;
 	int coins;
 
-// я думаю надо что -то типа check вместо твоих почему то  roubPlus и roubMinus или обоснуй!!!!
+	// я думаю надо что -то типа check вместо твоих почему то  roubPlus и roubMinus или обоснуй!!!!
 public:
 	//Constructors
-	Money(): roub(0), coins(0) {}//плохо!!!!
+	Money() : roub(0), coins(0) {}//плохо!!!!
 	~Money() { /*cout << "Destructor is woking!\n"; */ }
 	Money(int r, int c = 0) : roub(r), coins(c) {
 
@@ -41,34 +48,46 @@ public:
 	}
 
 	//Getter and setter for Roubles
-	void setRoub(int roub) { this->roub = roub; }// и никаких проверок? Плохо
+	void setRoub(int roub) { 
+		if (roub > 0)
+			this->roub = roub;
+		else
+			this->roub = 0;
+	}// и никаких проверок? Плохо
+
 	int getRoub() { return roub; }
 
 	//Getter and setter for coins
-	void setCouns(int coins) { this->coins = coins; }// и никаких проверок? Плохо
+	void setCouns(int coins) { 
+		if (coins > 0)
+			this->coins = coins;
+		else
+			this->coins = 0;
+	}// и никаких проверок? Плохо
+
 	int getCoins() { return coins; }
 
 
-	void operator = (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	void operator = (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		this->roub = m.roub;
 		this->coins = m.coins;
 	}
 
-	Money operator + (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	Money operator + (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		return Money(this->roub + m.roub, this->coins + m.coins);
 	}
 
-	void operator += (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	void operator += (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		this->roub += m.roub;
 		this->coins += m.coins;
 		roubPlus();
 	}
 
-	Money operator - (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	Money operator - (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		return Money(this->roub - m.roub, this->coins - m.coins);
 	}
 
-	void operator -= (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	void operator -= (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		roub -= m.roub;
 		if (roub < 0) { roub = 0; coins = 0;  cout << "The very little of roubles"; }
 		coins -= m.coins;
@@ -86,12 +105,12 @@ public:
 		else { return(--this->roub, this->coins); }
 	}
 
-	bool operator == (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	bool operator == (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub == m.roub && coins == m.coins) { return true; }
 		else { return false; }
 	}
 
-	bool operator > (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	bool operator > (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub > m.roub) { return true; }
 		else
 			return(coins > m.coins);//можно обойтись только return(coins > m.coins)
@@ -99,28 +118,28 @@ public:
 
 	}
 
-	bool operator >= (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	bool operator >= (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub >= m.roub) { return true; }
 		else
 			return(coins >= m.coins);
 
 	}
 
-	bool operator < (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	bool operator < (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub < m.roub) { return true; }
 		else
 			return(coins < m.coins);
 
 	}
 
-	bool operator <= (const Money m) {// точно так передавать ты хочешь m? Почему???? 
+	bool operator <= (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		if (roub <= m.roub) { return true; }
 		else
 			return(coins <= m.coins);
 
 	}
 
-	friend ostream& operator << (ostream & stream, const Money m) {
+	friend ostream& operator << (ostream & stream, const Money& m) {
 		stream << "Roubs: " << m.roub << "\nCoins: " << m.coins << '\n';
 		return stream;
 	}
