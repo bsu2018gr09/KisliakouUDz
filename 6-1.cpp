@@ -1,16 +1,7 @@
 /*
 	Исправлены принимаемые значения операторов
 	Добавлены проверки в сеттеры
-	
-	Обоснование roubPlus и roubMinus:
-	
-	Считаю, что в двух разных ситуациях использование метода 
-	с неконкретным названием check абсолютно не рационально.
-	В данной конкретной ситуации более целесообразно использовать названия,
-	как привиденныё выше. Программист, читающий код, с большей вероятностью поймёт 
-	roubPlus и roubMinus, вместо checkНепонятноЧтоИЗАчем
-	
-	Насчёт остальных замечаний согласен безоговорчно. Постарался всё исправить
+	Доработана функция check
 */
 #include <iostream>
 #include <random>
@@ -35,20 +26,16 @@ public:
 		//Case if count of roubs is less than 0
 		if (r < 0) { cout << "The very little of roubles!"; roub = 0; coins = 0; }
 
-		//Case if count of coins is more than 100
-		roubPlus();
-
-		//Case if count of coins is less than 0
-		roubMinus();
+		check();
 	}
 
 	Money(const Money& m) {
-		roub = m.roub;
-		coins = m.coins;
+		this->roub = m.roub;
+		this->coins = m.coins;
 	}
 
 	//Getter and setter for Roubles
-	void setRoub(int roub) { 
+	void setRoub(int roub) {
 		if (roub > 0)
 			this->roub = roub;
 		else
@@ -58,7 +45,7 @@ public:
 	int getRoub() { return roub; }
 
 	//Getter and setter for coins
-	void setCouns(int coins) { 
+	void setCouns(int coins) {
 		if (coins > 0)
 			this->coins = coins;
 		else
@@ -80,7 +67,7 @@ public:
 	void operator += (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
 		this->roub += m.roub;
 		this->coins += m.coins;
-		roubPlus();
+		check();
 	}
 
 	Money operator - (const Money& m) {// точно так передавать ты хочешь m? Почему???? 
@@ -91,9 +78,7 @@ public:
 		roub -= m.roub;
 		if (roub < 0) { roub = 0; coins = 0;  cout << "The very little of roubles"; }
 		coins -= m.coins;
-		if (coins < 0) {
-			roubMinus();
-		}
+		check();
 	}
 
 	Money operator ++ () {
@@ -145,19 +130,21 @@ public:
 	}
 
 private:
-	//Functions working with least or most values
-	void roubPlus() {
-		while (coins > 100) {
-			roub++;
-			coins -= 100;
+	//Function working with least or most values
+	void check() {
+		if (coins < 0) {
+			while (coins < 0) {
+				--roub;
+				coins += 100;
+			}
 		}
-	}
-
-	void roubMinus() {
-		while (coins < 0) {
-			roub--;
-			coins += 100;
+		else if (coins > 100) {
+			while (coins > 100) {
+				++roub;
+				coins -= 100;
+			}
 		}
+		else { return; }
 	}
 };
 
