@@ -38,7 +38,7 @@ int main() {
 
 	for (int i = 0; i < N; i++) {
 		cout << "Distance to the line from the point (" << p1[i] << ", " << p2[i] << "): ";
-		cout << findDistance(p1[i], p2[i], A, B, C) << '\n';
+		cout << findDistance(p1[i], p2[i], A, B, C) << '\n';// а где сортировка????
 	}
 
 	delete[]p1;
