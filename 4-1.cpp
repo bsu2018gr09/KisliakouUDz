@@ -89,6 +89,6 @@ char* mainTask(char* start, int count) {
 		cout << ' ';
 		printWordinFile(start);
 		output << ' ';
-	}
+	} 
 	return getNextWordStart(start);
 }
