@@ -10,7 +10,7 @@ int main() {
 	if (!ggg) { cout << "   file d:\\rez.bmp. Can't create\n"; exit(1); }
 
 	char buf[30];// куда читать байты
-	unsigned char color = 252;//компоненты цвета
+	unsigned char color = 252;//что это????? И как это будет работать???? Тут сразу ТРИ цвета????
 	unsigned int w, h;//надеемся. что тут 4 байта
 
 	fff.read((char *)&buf, 18);   //чтение 18 байт заголовка bmp
@@ -26,7 +26,7 @@ int main() {
 	//c.r=c.g=c.b=0;
 	for(int i = 1; i <= h; ++i, color = 255){
 		while(color > 0){
-		    ggg.write((char *)&color, 255);
+		    ggg.write((char *)&color, 255);//что это????
 			color -= 3;
 		}
 	}
