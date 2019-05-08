@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-
+//После каждого слова строки, оканчивающегося заданной подстрокой, вставить указанный символ.
 #include <iostream>
 #include <cstring>
 
@@ -85,7 +85,7 @@ void printString(char* pointer) {
 
 char* mainTask(char* start, char* subStart, char sym) {
 	start = strstr(start, subStart);
-	if (start == NULL)
+	if (start == NULL)//что это за NULL?
 		return nullptr;
 	
 	for (int i = 0; i < strlen(subStart); i++) {
