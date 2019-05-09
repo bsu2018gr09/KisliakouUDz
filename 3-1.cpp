@@ -1,5 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 //После каждого слова строки, оканчивающегося заданной подстрокой, вставить указанный символ.
+
+
+/*
+Всё работает без ошибок!
+Если слово, содержащее указанную подстроку, стоит в конце строки, пожалуйста, в конце строки поставьте пробел!
+Сложность возникает при работе с нулем-терминатором
+*/
 #include <iostream>
 #include <cstring>
 
@@ -11,10 +18,9 @@ const int N = 10;
 char* getNextWordStart(char* pointer);
 void shiftString(char* start);
 void printString(char* pointer);
-char* mainTask(char* start, char* subStartm, char sym);
+char* mainTask(char* start, char* subStart, char sym);
 
 int main() {
-	setlocale(LC_ALL, "Russian");
 	char buff[_Max];
 	char buff2[N];
 	char sym;
@@ -38,17 +44,17 @@ int main() {
 		exit(1);
 	}
 	strcpy(start2, buff2);
-	
+
 	char* tmp = start1;
-	while(tmp != nullptr)
+	while (tmp != nullptr)
 		tmp = mainTask(tmp, start2, sym);
 	printString(start1);
-  
-  delete[]start1;
+
+	/*delete[]start1;
 	start1 = nullptr;
 	delete[]start2;
-	start2 = nullptr;
-  
+	start2 = nullptr;*/
+
 	system("pause");
 	return 0;
 }
@@ -85,19 +91,19 @@ void printString(char* pointer) {
 
 char* mainTask(char* start, char* subStart, char sym) {
 	start = strstr(start, subStart);
-	if (start == NULL)//что это за NULL?
+	if (start == nullptr)
 		return nullptr;
-	
+
 	for (int i = 0; i < strlen(subStart); i++) {
 		if (start[i] != subStart[i])
 			return getNextWordStart(start);
 
-		if(start[i+1] != ' ' && subStart[i + 1] == 0)
+		if (start[i + 1] != ' ' && subStart[i + 1] == 0)
 			return getNextWordStart(start);
 	}
 
 	shiftString(start + strlen(subStart));
 	start[strlen(subStart)] = sym;
-	
+
 	return getNextWordStart(start);
 }
