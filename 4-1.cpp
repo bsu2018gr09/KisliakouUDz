@@ -10,7 +10,6 @@ using namespace std;
 char* getNextWordStart(char* pointer);
 int lettersInWord(char* pointer);
 int mainTask(char* start, int count);
-void sort(char**, int*, int);
 
 ifstream input("d:\\WarAndPiece.txt");
 ofstream output("d:\\result.txt");
