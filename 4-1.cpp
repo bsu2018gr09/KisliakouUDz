@@ -39,23 +39,7 @@ int main() {
 		if (input.eof()) { break; }
 	}
 	
-	bool flag = false;
-	do {
-		flag = false;
-		for (int g = 0; g < rowsCount - 1; g++) {
-			if (wordsInRowCount[g] > wordsInRowCount[g + 1]) {
-				int tmp = wordsInRowCount[g];
-				char* tmp1 = rows[g];
-
-				wordsInRowCount[g] = wordsInRowCount[g + 1];
-				wordsInRowCount[g + 1] = tmp;
-
-				rows[g] = rows[g + 1];
-				rows[g + 1] = tmp1;
-				flag = true;
-			}
-		}
-	} while (flag);
+	sort(rows, wordsInRowCount, rowsCount);
 
 	for (int g = 0; g < rowsCount; g++) {
 		output << wordsInRowCount[g] << ' ' << rows[g] << '\n';
@@ -100,6 +84,26 @@ int lettersInWord(char* pointer) {
 		i++;
 	}
 	return counter;
+}
+
+void sort(char** rows, int* wordsInRowCount, int rowsCount) {
+	bool flag = false;
+	do {
+		flag = false;
+		for (int g = 0; g < rowsCount - 1; g++) {
+			if (wordsInRowCount[g] < wordsInRowCount[g + 1]) {
+				int tmp = wordsInRowCount[g];
+				char* tmp1 = rows[g];
+
+				wordsInRowCount[g] = wordsInRowCount[g + 1];
+				wordsInRowCount[g + 1] = tmp;
+
+				rows[g] = rows[g + 1];
+				rows[g + 1] = tmp1;
+				flag = true;
+			}
+		}
+	} while (flag);
 }
 
 int mainTask(char* start, int count) {
