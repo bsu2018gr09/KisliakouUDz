@@ -10,6 +10,7 @@ using namespace std;
 char* getNextWordStart(char* pointer);
 int lettersInWord(char* pointer);
 int mainTask(char* start, int count);
+void sort(char**, int*, int);
 
 ifstream input("d:\\WarAndPiece.txt");
 ofstream output("d:\\result.txt");
@@ -38,8 +39,9 @@ int main() {
 		if (input.eof()) { break; }
 	}
 	
-	bool flag = true;
-	while (flag) {
+	bool flag = false;
+	do {
+		flag = false;
 		for (int g = 0; g < rowsCount - 1; g++) {
 			if (wordsInRowCount[g] > wordsInRowCount[g + 1]) {
 				int tmp = wordsInRowCount[g];
@@ -50,11 +52,10 @@ int main() {
 
 				rows[g] = rows[g + 1];
 				rows[g + 1] = tmp1;
+				flag = true;
 			}
 		}
-		if (flag) { break; }
-		else { flag = true; }
-	}
+	} while (flag);
 
 	for (int g = 0; g < rowsCount; g++) {
 		output << wordsInRowCount[g] << ' ' << rows[g] << '\n';
