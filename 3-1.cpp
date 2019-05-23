@@ -67,11 +67,10 @@ void mainTask(char* start, char* subStart, char sym) {
 	const int N = 500;
 	char *tmp = strtok(start, " ");
 	char **arr = new(nothrow) char *[N];
-	int i = 0, counter = 0;
+	int counter = 0;
 	while (tmp) {
-		arr[i] = new(nothrow) char[strlen(tmp)];
-		strcpy(arr[i], tmp);
-		i++;
+		arr[counter] = new(nothrow) char[strlen(tmp)];
+		strcpy(arr[counter], tmp);
 		counter++;
 		tmp = strtok(NULL, " ");
 	}
