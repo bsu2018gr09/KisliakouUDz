@@ -1,26 +1,22 @@
 #define _CRT_SECURE_NO_WARNINGS
 //После каждого слова строки, оканчивающегося заданной подстрокой, вставить указанный символ.
 
-
-/*
-Всё работает без ошибок!
-Если слово, содержащее указанную подстроку, стоит в конце строки, пожалуйста, в конце строки поставьте пробел!
-Сложность возникает при работе с нулем-терминатором
-*/
 #include <iostream>
 #include <cstring>
+#include <Windows.h>
 
 using namespace std;
 
-const int _Max = 1000;
+const int _Max = 10000;
 const int N = 10;
 
-char* getNextWordStart(char* pointer);
-void shiftString(char* start);
 void printString(char* pointer);
-char* mainTask(char* start, char* subStart, char sym);
+void mainTask(char* start, char* subStart, char sym);
 
 int main() {
+	setlocale(LC_ALL, "Russian");
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
 	char buff[_Max];
 	char buff2[N];
 	char sym;
@@ -44,66 +40,49 @@ int main() {
 		exit(1);
 	}
 	strcpy(start2, buff2);
+	
+	mainTask(start1, start2, sym);
+	cout << '\n';
 
-	char* tmp = start1;
-	while (tmp != nullptr)
-		tmp = mainTask(tmp, start2, sym);
-	printString(start1);
-
-	/*delete[]start1;
+	delete[]start1;
 	start1 = nullptr;
 	delete[]start2;
-	start2 = nullptr;*/
+	start2 = nullptr;
 
 	system("pause");
 	return 0;
 }
 
-char* getNextWordStart(char* pointer) {
-	int i = 0;
-	while (pointer[i] != ' ') {
-		if (pointer[i] == 0)
-			return 0;
-		i++;
-	}
-	while (pointer[i++] == ' ') {
-		if (pointer[i] == 0)
-			return 0;
-		i++;
-	}
-	return (pointer + i - 1);
-}
 
-void shiftString(char* start) {
-	for (int i = strlen(start) + 1; i >= 0; i--) {
-		start[i + 1] = start[i];
-		start[i] = ' ';
-	}
-}
 
 void printString(char* pointer) {
 	int i = 0;
 	while (pointer[i]) {
 		cout << pointer[i++];
 	}
-	cout << '\n';
+	cout << ' ';
 }
 
-char* mainTask(char* start, char* subStart, char sym) {
-	start = strstr(start, subStart);
-	if (start == nullptr)
-		return nullptr;
-
-	for (int i = 0; i < strlen(subStart); i++) {
-		if (start[i] != subStart[i])
-			return getNextWordStart(start);
-
-		if (start[i + 1] != ' ' && subStart[i + 1] == 0)
-			return getNextWordStart(start);
+void mainTask(char* start, char* subStart, char sym) {
+	const int N = 500;
+	char *tmp = strtok(start, " ");
+	char **arr = new(nothrow) char *[N];
+	int i = 0, counter = 0;
+	while (tmp) {
+		arr[i] = new(nothrow) char[strlen(tmp)];
+		strcpy(arr[i], tmp);
+		i++;
+		counter++;
+		tmp = strtok(NULL, " ");
 	}
-
-	shiftString(start + strlen(subStart));
-	start[strlen(subStart)] = sym;
-
-	return getNextWordStart(start);
+	for(int i = 0; i < counter; i++) {
+		char* tmp = arr[i];
+		tmp += strlen(arr[i]) - strlen(subStart);
+		if (strstr(tmp, subStart)) {
+			strcat(arr[i], " ");
+			arr[i][strlen(arr[i]) - 1] = sym;
+		}
+		printString(arr[i]);
+	}
 }
+
