@@ -8,7 +8,6 @@ using namespace std;
 
 int* give_memory(int N);
 void init_array(int* p, int N, int);
-float findDistance(int x, int y, int A, int B, int C);
 void sort(float* p1, int* p2, int* p3, int N);
 void print_array(int* p, int N);
 
@@ -39,7 +38,7 @@ int main() {
 
 	float* arrDist = new float[N];
 	for (int i = 0; i < N; i++) {
-		arrDist[i] = findDistance(p1[i], p2[i], A, B, C);
+		arrDist[i] = abs(A*p1[i] + B * p2[i] + C) / sqrt(A*A + B * B); 
 	}
 	sort(arrDist, p1, p2, N);
 	cout << '\n';
@@ -77,10 +76,6 @@ void print_array(int* p, int N) {
 	cout << '\n';
 }
 
-float findDistance(int x, int y, int A, int B, int C) {
-	float distance = abs(A*x + B * y + C) / sqrt(A*A + B*B);
-	return distance;
-}
 
 void sort(float* arrDist, int* p1, int* p2, int N) {
 	bool flag = true;
@@ -105,3 +100,4 @@ void sort(float* arrDist, int* p1, int* p2, int N) {
 		else { flag = true; }
 	}
 }
+
