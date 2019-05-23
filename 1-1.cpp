@@ -37,8 +37,9 @@ int main() {
 	cout << '\n';
 
 	float* arrDist = new float[N];
+	float tmp = sqrt(A*A + B * B);
 	for (int i = 0; i < N; i++) {
-		arrDist[i] = abs(A*p1[i] + B * p2[i] + C) / sqrt(A*A + B * B); 
+		arrDist[i] = abs(A*p1[i] + B*p2[i] + C) / tmp; 
 	}
 	sort(arrDist, p1, p2, N);
 	cout << '\n';
