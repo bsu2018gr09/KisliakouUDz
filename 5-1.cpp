@@ -1,6 +1,6 @@
 #include<iostream>
 #include<fstream>  
-#include<cmath>
+
 using namespace std;
 struct color { unsigned char r; unsigned char g; unsigned char b; };
 
