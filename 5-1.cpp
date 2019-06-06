@@ -30,13 +30,13 @@ int main() {
 
 	cout << "Enter count of steps: "; cin >> steps;
 	float p = (float)(w / steps);
-	r_start = 10;  
-	g_start = 90;
-	b_start = 40;
+	r_start = 0;  
+	g_start = 0;
+	b_start = 255;
 
 
 	r_end = 150; 
-	g_end = 100; 
+	g_end = 255; 
 	b_end = 50;
 
 
