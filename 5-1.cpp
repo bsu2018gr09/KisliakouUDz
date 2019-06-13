@@ -46,7 +46,7 @@ int main() {
 
 	float colorSteps = w / steps;
 	float tmpSteps = colorSteps;
-	sr = (float)(rr - r) / steps;
+	sr = (float)(rr - r) / steps;  
 	sg = (float)(gg - g) / steps;
 	sb = (float)(bb - b) / steps;
 	tr = (float)r;
