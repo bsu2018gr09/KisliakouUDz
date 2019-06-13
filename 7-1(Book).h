@@ -20,11 +20,11 @@ public:
 	Book(): theme(nullptr), author(), title(), publYear(0),
 	copies(0), cost(0){};				// Канструктар па змаўчанні
 	
-	Book(string tit) {	// Канструктар з параметрам назвы
+	Book(string tit) {	// Канструктар з параметрам назвы//а чаму не iнiцыалiзацыя????
 		setTitle(tit);
 	}
 
-	Book(string tit, string auth) {	// Канструктар з параметрамі назвы і аўтара
+	Book(string tit, string auth) {	// Канструктар з параметрамі назвы і аўтара //а чаму не iнiцыалiзацыя????
 		setTitle(tit);
 		setAuthor(auth);
 	}
@@ -42,7 +42,7 @@ public:
 		setYear(year);
 	}
 
-	Book(Book &from) {	// copy constructor
+	Book(Book &from) {	// copy constructor // а што ён вяртае?????? чаму не указана????
 		setTheme(from.theme);
 		setAuthor(from.author);
 		setTitle(from.title);
@@ -57,10 +57,10 @@ public:
 		return *this;
 	}
 
-	Book(Book&& other){ // move constructor
-		if (&tmp == this) return *this;
+	Book(Book&& other){ // move constructor а што ён вяртае?????? чаму не указана????
+		if (&tmp == this) return *this;//чо?????????? откуда tmp????? Может все таки other
         this = tmp;
-        tmp.theme = nullptr; 
+        tmp.theme = nullptr; //следующие 6 строк не нужны ))) кроме = nullptr!!! Зачем лишняя работа, если сейчас tmp умрет  
         tmp.author = "";
         tmp.title = "";
         tmp.publYear = 0;
@@ -69,7 +69,7 @@ public:
         return *this;
 	}
 
-	~Book() {};			// Дэструктар
+	~Book() {};			// Дэструктар Оппа!!!!!!!!! Учечка памяти в theme!!!!
 
 	// Праверка на не нулявое значэнне і на добры указальнік для тэмы
 	void setTheme(const char* th) { 
