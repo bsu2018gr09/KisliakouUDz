@@ -17,9 +17,7 @@ private:
 	float cost;			// Кошт аднаго экземпляра
 
 public:
-	Book(): theme(nullptr), author(), title(), publYear(0),
-	copies(0), cost(0){};				// Канструктар па змаўчанні
-	
+	Book(): theme(nullptr), author(), title(), publYear(0),	copies(0), cost(0){};				// Канструктар па змаўчанні
 	Book(string tit) {	// Канструктар з параметрам назвы//а чаму не iнiцыалiзацыя????
 		setTitle(tit);
 	}
@@ -50,13 +48,6 @@ public:
 		setCopies(from.copies);
 		setCost(from.cost);
 	}
-
-	Book& operator = (const Book& other) { //copy assignment
-		Book tmp(other);
-		my_swap(tmp);
-		return *this;
-	}
-
 	Book(Book&& other){ // move constructor а што ён вяртае?????? чаму не указана????
 		if (&tmp == this) return *this;//чо?????????? откуда tmp????? Может все таки other
         this = tmp;
@@ -69,6 +60,14 @@ public:
         return *this;
 	}
 
+
+	Book& operator = (const Book& other) { //copy assignment
+		Book tmp(other);
+		my_swap(tmp);
+		return *this;
+	}
+
+	
 	~Book() {};			// Дэструктар Оппа!!!!!!!!! Учечка памяти в theme!!!!
 
 	// Праверка на не нулявое значэнне і на добры указальнік для тэмы
